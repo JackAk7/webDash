@@ -1,0 +1,429 @@
+/* Importar una fuente moderna */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap");
+
+/* --- Variables de Color (¡Fácil de explicar!) --- */
+:root {
+  --primary-color: #6a11cb;
+  --secondary-color: #2575fc;
+  --bg-light: #f4f7fa;
+  --bg-dark: #1e1e2d; /* Para la barra lateral */
+  --card-bg: #ffffff;
+  --text-light: #f1f1f1;
+  --text-dark: #333;
+  --shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* --- Reseteo Básico --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+
+body {
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+}
+
+/* --- Layout Principal (Flexbox) --- */
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* --- 1. Barra Lateral --- */
+.sidebar {
+  flex-basis: 260px; /* Ancho fijo */
+  flex-shrink: 0;
+  background: linear-gradient(
+    180deg,
+    var(--primary-color) 0%,
+    var(--secondary-color) 100%
+  );
+  color: var(--text-light);
+  padding: 1.5rem;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.sidebar-nav a {
+  display: block;
+  color: var(--text-light);
+  text-decoration: none;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.sidebar-nav a i {
+  margin-right: 0.8rem;
+  width: 20px; /* Alinea los iconos */
+}
+
+.sidebar-nav a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-nav a.active {
+  background-color: rgba(255, 255, 255, 0.2);
+  font-weight: 600;
+}
+
+/* --- 2. Contenido Principal --- */
+.main-content {
+  flex-grow: 1; /* Ocupa el resto del espacio */
+  padding: 2rem;
+  overflow-y: auto; /* Permite scroll si el contenido es mucho */
+}
+
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.header-user {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.5rem;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* --- 3. Tarjetas KPI (¡Efecto llamativo!) --- */
+.kpi-cards {
+  display: grid;
+  /* Esto es clave para explicar responsividad: */
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.card {
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px); /* Efecto "elevado" */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.card-icon {
+  font-size: 2rem;
+  padding: 1rem;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  width: 60px;
+  height: 60px;
+}
+/* Colores de los iconos */
+.card-icon.blue {
+  background-color: #e0f0ff;
+  color: #007bff;
+}
+.card-icon.green {
+  background-color: #e0f8f0;
+  color: #28a745;
+}
+.card-icon.orange {
+  background-color: #fff4e0;
+  color: #ffc107;
+}
+.card-icon.red {
+  background-color: #ffe0e0;
+  color: #dc3545;
+}
+
+.card-info .card-value {
+  font-size: 2rem;
+  font-weight: 700;
+  display: block;
+}
+.card-info .card-label {
+  font-size: 0.9rem;
+  color: #888;
+}
+
+/* --- 4. Sección de Gráficos --- */
+.charts-section {
+  display: grid;
+  grid-template-columns: 3fr 2fr; /* Gráfico de barras más grande */
+  gap: 1.5rem;
+}
+
+.chart-card {
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+}
+
+.chart-card h3 {
+  margin-bottom: 1rem;
+}
+
+/* --- Responsividad para móviles --- */
+@media (max-width: 1200px) {
+  .charts-section {
+    grid-template-columns: 1fr; /* Un gráfico encima del otro */
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-container {
+    flex-direction: column; /* Apila la barra lateral y el contenido */
+  }
+  .sidebar {
+    flex-basis: auto; /* El ancho se ajusta */
+    /* Podríamos ocultarlo y mostrarlo con un botón (más JS) */
+  }
+  .main-header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+/*A*/
+/* --- 5. Estilos de la Ventana Modal --- */
+
+.modal-overlay {
+  /* Oculto por defecto */
+  display: none;
+  position: fixed; /* Se queda fijo en la pantalla */
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro semitransparente */
+
+  /* Para centrar el contenido */
+  align-items: center;
+  justify-content: center;
+
+  /* Animación */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Clase que se añade con JS para mostrar la modal */
+.modal-overlay.active {
+  display: flex; /* Lo cambiamos de 'none' a 'flex' para mostrarlo */
+  opacity: 1;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 500px;
+  position: relative; /* Para posicionar el botón de cerrar */
+
+  /* Animación de entrada */
+  transform: translateY(-20px);
+  transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal-content {
+  transform: translateY(0);
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #aaa;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.modal-close:hover {
+  color: #333;
+}
+
+.modal-content h2 {
+  margin-bottom: 0.5rem;
+}
+
+.modal-content p {
+  margin-bottom: 2rem;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Estilos del formulario dentro de la modal */
+.form-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.form-group input {
+  width: 100px;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  text-align: right;
+}
+
+.modal-submit-btn {
+  width: 100%;
+  padding: 1rem;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(
+    90deg,
+    var(--primary-color) 0%,
+    var(--secondary-color) 100%
+  );
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.modal-submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* --- 5. Estilos de la Ventana Modal (Ajuste) --- */
+
+/* Un nuevo estilo para formularios con labels arriba */
+.form-group-column {
+  margin-bottom: 1.5rem;
+}
+.form-group-column label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.form-group-column input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+/* --- 6. Estilos de Notificaciones --- */
+.header-user {
+  position: relative; /* Contenedor padre para el dropdown */
+}
+
+.notification-bell {
+  position: relative; /* Contenedor para el badge */
+  font-size: 1.5rem;
+  color: #555;
+  cursor: pointer;
+}
+
+.notification-badge {
+  position: absolute;
+  top: -5px;
+  right: -8px;
+  background-color: #dc3545;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 600;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: grid;
+  place-items: center;
+
+  /* Oculto por defecto */
+  transform: scale(0);
+  transition: transform 0.2s ease;
+}
+
+.notification-badge.active {
+  transform: scale(1); /* Se muestra */
+}
+
+.notification-dropdown {
+  /* Oculto por defecto */
+  display: none;
+  position: absolute;
+  top: 50px; /* Debajo del header */
+  right: 0;
+  width: 320px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+  z-index: 1001;
+  overflow: hidden;
+}
+
+.notification-dropdown.active {
+  display: block; /* Se muestra */
+}
+
+.notification-header {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.notification-list {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.notification-item {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 0.9rem;
+}
+.notification-item:last-child {
+  border-bottom: none;
+}
+.notification-item:hover {
+  background-color: var(--bg-light);
+}
+
+.notification-item .timestamp {
+  font-size: 0.8rem;
+  color: #888;
+  display: block;
+  margin-top: 0.25rem;
+}
+
+.no-notifications {
+  padding: 2rem;
+  text-align: center;
+  color: #888;
+}

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Atractivo</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <div class="dashboard-container">
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <i class="fa-solid fa-graduation-cap"></i>
+          <h2>Universidad</h2>
+        </div>
+        <nav class="sidebar-nav">
+          <a href="#" class="active"
+            ><i class="fa-solid fa-chart-pie"></i> Dashboard</a
+          >
+          <a href="#" id="open-student-modal"
+            ><i class="fa-solid fa-user-graduate"></i> Estudiantes</a
+          >
+          <a href="#" id="open-courses-modal"
+            ><i class="fa-solid fa-book"></i> Cursos</a
+          >
+          <a href="#" id="open-grades-modal"
+            ><i class="fa-solid fa-pen-to-square"></i> Calificaciones</a
+          >
+          <a href="#" id="open-config-modal"
+            ><i class="fa-solid fa-cog"></i> Configuración</a
+          >
+        </nav>
+      </aside>
+
+      <main class="main-content">
+        <header class="main-header">
+          <h1>Dashboard de Analíticas</h1>
+          <div class="header-user">
+            <div class="notification-bell" id="notification-bell">
+              <i class="fa-solid fa-bell"></i>
+              <span class="notification-badge" id="notification-badge">0</span>
+            </div>
+
+            <div class="notification-dropdown" id="notification-dropdown">
+              <div class="notification-header">
+                <h3>Notificaciones</h3>
+              </div>
+              <div class="notification-list" id="notification-list">
+                <p class="no-notifications">No hay notificaciones nuevas.</p>
+              </div>
+            </div>
+
+            <img
+              src="https://i.pravatar.cc/150?img=3"
+              alt="Avatar de usuario"
+              class="user-avatar"
+              id="open-profile-modal"
+            />
+          </div>
+        </header>
+
+        <section class="kpi-cards">
+          <div class="card">
+            <div class="card-icon blue">
+              <i class="fa-solid fa-users"></i>
+            </div>
+            <div class="card-info">
+              <span class="card-value" id="total-students-value">1,250</span>
+              <span class="card-label">Total Estudiantes</span>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-icon green">
+              <i class="fa-solid fa-chalkboard-user"></i>
+            </div>
+            <div class="card-info">
+              <span class="card-value" id="active-courses-value">85</span>
+              <span class="card-label">Cursos Activos</span>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-icon orange">
+              <i class="fa-solid fa-star"></i>
+            </div>
+            <div class="card-info">
+              <span class="card-value" id="average-grade-value">8.9 / 10</span>
+              <span class="card-label">Promedio General</span>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-icon red">
+              <i class="fa-solid fa-server"></i>
+            </div>
+            <div class="card-info">
+              <span class="card-value">99.8%</span>
+              <span class="card-label">Uptime Plataforma</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="charts-section">
+          <div class="chart-card">
+            <h3>Distribución de Calificaciones</h3>
+            <canvas id="gradeChart"></canvas>
+          </div>
+          <div class="chart-card">
+            <h3>Estudiantes por Carrera</h3>
+            <canvas id="majorChart"></canvas>
+          </div>
+        </section>
+      </main>
+    </div>
+    <div id="student-modal" class="modal-overlay">
+      <div class="modal-content">
+        <span class="modal-close">&times;</span>
+        <h2>Actualizar Datos de Estudiantes</h2>
+        <p>
+          Modifica la cantidad de estudiantes por carrera y el gráfico se
+          actualizará.
+        </p>
+        <form id="student-form">
+          <div class="form-group">
+            <label for="sw-students">Ing. Software:</label>
+            <input type="number" id="sw-students" min="0" />
+          </div>
+          <div class="form-group">
+            <label for="dg-students">Diseño Gráfico:</label>
+            <input type="number" id="dg-students" min="0" />
+          </div>
+          <div class="form-group">
+            <label for="mkt-students">Marketing:</label>
+            <input type="number" id="mkt-students" min="0" />
+          </div>
+          <div class="form-group">
+            <label for="med-students">Medicina:</label>
+            <input type="number" id="med-students" min="0" />
+          </div>
+          <button type="submit" class="modal-submit-btn">
+            Actualizar Dashboard
+          </button>
+        </form>
+      </div>
+    </div>
+    <div id="courses-modal" class="modal-overlay">
+      <div class="modal-content">
+        <span class="modal-close">&times;</span>
+        <h2>Actualizar Cursos Activos</h2>
+        <p>Modifica la cantidad de cursos por carrera.</p>
+
+        <form id="courses-form">
+          <div class="form-group">
+            <label for="sw-courses">Ing. Software:</label>
+            <input type="number" id="sw-courses" min="0" />
+          </div>
+          <div class="form-group">
+            <label for="dg-courses">Diseño Gráfico:</label>
+            <input type="number" id="dg-courses" min="0" />
+          </div>
+          <div class="form-group">
+            <label for="mkt-courses">Marketing:</label>
+            <input type="number" id="mkt-courses" min="0" />
+          </div>
+          <div class="form-group">
+            <label for="med-courses">Medicina:</label>
+            <input type="number" id="med-courses" min="0" />
+          </div>
+          <button type="submit" class="modal-submit-btn">
+            Actualizar Dashboard
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div id="grades-modal" class="modal-overlay">
+      <div class="modal-content">
+        <span class="modal-close">&times;</span>
+        <h2>Actualizar Calificaciones</h2>
+        <p>Ingresa la calificación promedio (0-10) de cada carrera.</p>
+        <form id="grades-form">
+          <div class="form-group">
+            <label for="sw-grade">Ing. Software:</label>
+            <input type="number" id="sw-grade" min="0" max="10" step="0.1" />
+          </div>
+          <div class="form-group">
+            <label for="dg-grade">Diseño Gráfico:</label>
+            <input type="number" id="dg-grade" min="0" max="10" step="0.1" />
+          </div>
+          <div class="form-group">
+            <label for="mkt-grade">Marketing:</label>
+            <input type="number" id="mkt-grade" min="0" max="10" step="0.1" />
+          </div>
+          <div class="form-group">
+            <label for="med-grade">Medicina:</label>
+            <input type="number" id="med-grade" min="0" max="10" step="0.1" />
+          </div>
+          <button type="submit" class="modal-submit-btn">
+            Actualizar Dashboard
+          </button>
+        </form>
+      </div>
+    </div>
+    <div id="profile-modal" class="modal-overlay">
+      <div class="modal-content">
+        <span class="modal-close">&times;</span>
+        <h2>Configuración de Perfil</h2>
+        <p>Esta información se guardará en tu navegador.</p>
+
+        <form id="profile-form">
+          <div class="form-group-column">
+            <label for="profile-name">Nombres y Apellidos:</label>
+            <input type="text" id="profile-name" required />
+          </div>
+          <div class="form-group-column">
+            <label for="profile-dni">DNI:</label>
+            <input type="text" id="profile-dni" />
+          </div>
+          <div class="form-group-column">
+            <label for="profile-address">Dirección:</label>
+            <input type="text" id="profile-address" />
+          </div>
+          <div class="form-group-column">
+            <label for="profile-major">Carrera:</label>
+            <input type="text" id="profile-major" />
+          </div>
+          <button type="submit" class="modal-submit-btn">
+            Guardar Cambios
+          </button>
+        </form>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
