@@ -12,7 +12,36 @@
   </head>
 
   <body>
-    <div class="dashboard-container">
+    <div class="login-container" id="login-screen">
+      <form class="login-form" id="login-form">
+        <div class="login-header">
+          <i class="fa-solid fa-graduation-cap"></i>
+          <h2>UniMetrics</h2>
+          <!-- O el nombre que hayas elegido -->
+          <p>Por favor, inicia sesión para continuar.</p>
+        </div>
+
+        <div class="login-group">
+          <label for="username">Usuario:</label>
+          <input type="text" id="username" required />
+        </div>
+
+        <div class="login-group">
+          <label for="password">Contraseña:</label>
+          <div class="input-wrapper">
+            <input type="password" id="password" required />
+            <i class="fa-solid fa-eye" id="toggle-password"></i>
+          </div>
+        </div>
+        <!-- Mensaje de error (oculto por defecto) -->
+        <p class="login-error" id="login-error">
+          Usuario o contraseña incorrectos.
+        </p>
+
+        <button type="submit" class="login-button">Ingresar</button>
+      </form>
+    </div>
+    <div class="dashboard-container hidden" id="dashboard-main">
       <aside class="sidebar">
         <div class="sidebar-header">
           <i class="fa-solid fa-graduation-cap"></i>
@@ -115,7 +144,7 @@
         </section>
       </main>
     </div>
-    <div id="student-modal" class="modal-overlay">
+    <div id="student-modal" class="modal-overlay hidden">
       <div class="modal-content">
         <span class="modal-close">&times;</span>
         <h2>Actualizar Datos de Estudiantes</h2>
@@ -146,7 +175,7 @@
         </form>
       </div>
     </div>
-    <div id="courses-modal" class="modal-overlay">
+    <div id="courses-modal" class="modal-overlay hidden">
       <div class="modal-content">
         <span class="modal-close">&times;</span>
         <h2>Actualizar Cursos Activos</h2>
@@ -176,7 +205,7 @@
       </div>
     </div>
 
-    <div id="grades-modal" class="modal-overlay">
+    <div id="grades-modal" class="modal-overlay hidden">
       <div class="modal-content">
         <span class="modal-close">&times;</span>
         <h2>Actualizar Calificaciones</h2>
@@ -204,7 +233,7 @@
         </form>
       </div>
     </div>
-    <div id="profile-modal" class="modal-overlay">
+    <div id="profile-modal" class="modal-overlay hidden">
       <div class="modal-content">
         <span class="modal-close">&times;</span>
         <h2>Configuración de Perfil</h2>
@@ -231,6 +260,10 @@
             Guardar Cambios
           </button>
         </form>
+        <hr class="modal-divider" />
+        <button class="modal-logout-btn" id="logout-button">
+          <i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión
+        </button>
       </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

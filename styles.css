@@ -26,6 +26,10 @@ body {
   color: var(--text-dark);
 }
 
+.hidden {
+  display: none !important; /* !important para asegurar que se oculte */
+}
+
 /* --- Layout Principal (Flexbox) --- */
 .dashboard-container {
   display: flex;
@@ -426,4 +430,153 @@ body {
   padding: 2rem;
   text-align: center;
   color: #888;
+}
+
+/* --- 7. Estilos de Pantalla de Login --- */
+
+.login-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(
+    135deg,
+    var(--primary-color) 0%,
+    var(--secondary-color) 100%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000; /* Por encima de todo */
+}
+
+.login-form {
+  background-color: var(--card-bg);
+  padding: 3rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.login-header {
+  margin-bottom: 2rem;
+}
+
+.login-header .fa-graduation-cap {
+  font-size: 3rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.login-header h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.login-header p {
+  color: #666;
+}
+
+.login-group {
+  text-align: left;
+  margin-bottom: 1.5rem;
+}
+
+.login-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.login-group input {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.login-error {
+  color: #dc3545; /* Rojo de error */
+  font-weight: 600;
+  margin-bottom: 1rem;
+  display: none; /* Oculto por defecto */
+}
+
+.login-button {
+  width: 100%;
+  padding: 1rem;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(
+    90deg,
+    var(--primary-color) 0%,
+    var(--secondary-color) 100%
+  );
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.login-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* --- 8. Estilos para Toggle de Contraseña y Logout --- */
+
+/* Contenedor para el input y el icono */
+.input-wrapper {
+  position: relative;
+}
+
+/* Ajusta el input de contraseña para que deje espacio al icono */
+.login-group input[type="password"],
+.login-group input[type="text"] {
+  /* (Asegúrate de que el ID #username no se vea afectado si no está en un wrapper) */
+  /* Lo mejor es apuntar específicamente */
+  #password {
+    padding-right: 45px; /* Espacio para el ojo */
+  }
+}
+
+/* Estilo del icono del ojo */
+#toggle-password {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #888;
+  transition: color 0.2s ease;
+}
+#toggle-password:hover {
+  color: var(--primary-color);
+}
+
+/* Botón de Cerrar Sesión */
+.modal-logout-btn {
+  margin-top: 1rem;
+  width: 100%;
+  padding: 1rem;
+  border: none;
+  border-radius: 8px;
+  background: #dc3545; /* Rojo de peligro/salida */
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+.modal-logout-btn i {
+  margin-right: 0.5rem;
+}
+.modal-logout-btn:hover {
+  background-color: #c82333; /* Rojo más oscuro */
+  transform: translateY(-2px);
 }
